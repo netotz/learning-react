@@ -1,0 +1,32 @@
+.task-note {
+    display: flex;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 15px;
+    background-color: yellow;
+    transition: 0.1s;
+}
+
+.task-note-text {
+    flex: 1;
+    padding: 5px;
+    border: none;
+    font-size: 20px;
+}
+
+.icon {
+    margin-left: 10px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+    .task-note {
+        width: 40%;
+    }
+}
+@media (max-width: 700px) {
+    .task-note {
+        width: 95%;
+    }
+}
