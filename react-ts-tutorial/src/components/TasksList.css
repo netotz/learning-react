@@ -4,5 +4,16 @@
     flex-direction: column;
     width: 47.5%;
     padding: 15px;
-    background-color: rgb(50, 195, 205);
+}
+
+@media (max-width: 1100px) {
+    .tasks-list {
+      width: 45%;
+    }
+}
+  
+@media (max-width: 700px) {
+    .tasks-list {
+      width: 95%;
+    }
 }

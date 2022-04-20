@@ -34,3 +34,8 @@
     background-color: #0c3057;
 }
   
+@media (max-width: 700px) {
+    .input-form {
+      width: 95%;
+    }
+}
