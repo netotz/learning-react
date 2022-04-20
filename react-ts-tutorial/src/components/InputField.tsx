@@ -1,5 +1,5 @@
 import React from "react";
-import "./InputField.tsx.css";
+import "./InputField.css";
 
 interface ITaskTextProps {
     taskText: string;
