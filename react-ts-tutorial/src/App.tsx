@@ -12,13 +12,12 @@ function App() {
 
     if (taskText == "")
       return;
-    
-    tasks.push({
+
+    setTasks([...tasks, {
       id: Date.now(),
       text: taskText,
       isDone: false
-    });
-    setTasks(tasks);
+    }])
     setTaskText("");
   }
 
