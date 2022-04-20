@@ -1,13 +1,14 @@
 import React from "react";
 import "./InputField.css";
 
-interface ITaskTextProps {
+interface Props {
     taskText: string;
     setTaskText: (t: string) => void;
     handleSubmit: (e: React.FormEvent) => void;
 }
 
-function InputField({taskText, setTaskText, handleSubmit}: ITaskTextProps) {
+export default function InputField(
+    { taskText, setTaskText, handleSubmit }: Props) {
     return (
         <form className="input-form"
             onSubmit={e => handleSubmit(e)}>
@@ -21,5 +22,3 @@ function InputField({taskText, setTaskText, handleSubmit}: ITaskTextProps) {
         </form>
     );
 }
-
-export default InputField;

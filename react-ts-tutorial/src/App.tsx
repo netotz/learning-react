@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import './App.css';
-import InputField from './components/InputField';
-import TasksList from './components/TasksList';
-import { Task } from './models/Task';
+import React, { useState } from "react";
+import "./App.css";
+import InputField from "./components/InputField";
+import TasksList from "./components/TasksList";
+import { Task } from "./models/Task";
 
 function App() {
   const [taskText, setTaskText] = useState("");
@@ -11,14 +11,16 @@ function App() {
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
-    if (taskText == "")
-      return;
+    if (taskText == "") return;
 
-    setTasks([...tasks, {
-      id: Date.now(),
-      text: taskText,
-      isDone: false
-    }])
+    setTasks([
+      ...tasks,
+      {
+        id: Date.now(),
+        text: taskText,
+        isDone: false,
+      },
+    ]);
     setTaskText("");
   }
 
@@ -26,12 +28,13 @@ function App() {
     <div className="App">
       <span className="heading">Taskify</span>
 
-      <InputField taskText={taskText}
+      <InputField
+        taskText={taskText}
         setTaskText={setTaskText}
-        handleSubmit={handleSubmit} />
-      
-      <TasksList tasks={tasks}
-        setTasks={setTasks} />
+        handleSubmit={handleSubmit}
+      />
+
+      <TasksList tasks={tasks} setTasks={setTasks} />
     </div>
   );
 }

@@ -1,17 +1,13 @@
 import React from "react";
 import { Task } from "../models/Task";
 
-interface TasksListProps {
+interface Props {
     tasks: Task[];
     setTasks: (t: Task[]) => void;
 }
 
-function TasksList({tasks, setTasks}: TasksListProps) {
-    return (
-        <div className="tasks-list">
-            
-        </div>
-    );
-}
+export default function TasksList(
+    { tasks, setTasks }: Props) {
 
-export default TasksList;
+    return <div className="tasks-list"></div>;
+}
