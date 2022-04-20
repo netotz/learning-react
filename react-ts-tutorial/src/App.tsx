@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import InputField from './components/InputField';
+import TasksList from './components/TasksList';
 import { Task } from './models/Task';
 
 function App() {
@@ -21,8 +22,6 @@ function App() {
     setTaskText("");
   }
 
-  console.log(tasks);
-
   return (
     <div className="App">
       <span className="heading">Taskify</span>
@@ -30,6 +29,9 @@ function App() {
       <InputField taskText={taskText}
         setTaskText={setTaskText}
         handleSubmit={handleSubmit} />
+      
+      <TasksList tasks={tasks}
+        setTasks={setTasks} />
     </div>
   );
 }
