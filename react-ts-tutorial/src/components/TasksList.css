@@ -1,0 +1,8 @@
+.tasks-list {
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 47.5%;
+    padding: 15px;
+    background-color: rgb(50, 195, 205);
+}
