@@ -17,7 +17,7 @@ function App() {
     const modTasks = tasks;
     const newId = Date.now();
     modTasks.set(newId, {
-      id: Date.now(),
+      id: newId,
       text: taskText,
       isDone: false,
     });
