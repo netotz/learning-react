@@ -14,7 +14,7 @@ function App() {
 
     if (taskText == "") return;
 
-    const modTasks = tasks;
+    const modTasks = new Map(tasks);
     const newId = Date.now();
     modTasks.set(newId, {
       id: newId,
