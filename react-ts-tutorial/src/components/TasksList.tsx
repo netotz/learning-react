@@ -1,26 +1,24 @@
 import React from "react";
 import { Task } from "../models/Task";
-import { TasksDict } from "../types/TasksDict";
 import TaskNote from "./TaskNote";
 
 interface Props {
-    tasks: TasksDict;
-    setTasks: (t: TasksDict) => void;
+    tasks: Task[];
+    setTasks: (t: Task[]) => void;
 }
 
 export default function TasksList({ tasks, setTasks }: Props) {
     function handleDelete(taskId: number) {
-        const modTasks = new Map(tasks);
-        modTasks.delete(taskId);
-        setTasks(modTasks);
+        setTasks(tasks.filter(task => task.id != taskId));
     }
 
     function handleDone(taskId: number) {
-        const modTasks = new Map(tasks);
-        let task = modTasks.get(taskId)!;
-        task.isDone = !task.isDone;
-        modTasks.set(taskId, task);
-        setTasks(modTasks);
+        setTasks(tasks.map(task => {
+            if (task.id == taskId) {
+                task.isDone = !task.isDone;
+            }
+            return task;
+        }));
     }
 
     return (
