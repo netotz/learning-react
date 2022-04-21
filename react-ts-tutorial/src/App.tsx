@@ -11,7 +11,7 @@ function App() {
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
-    if (taskText == "")
+    if (taskText === "")
       return;
 
     setTasks([...tasks, {

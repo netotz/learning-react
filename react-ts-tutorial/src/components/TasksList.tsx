@@ -9,12 +9,12 @@ interface Props {
 
 export default function TasksList({ tasks, setTasks }: Props) {
     function handleDelete(taskId: number) {
-        setTasks(tasks.filter(task => task.id != taskId));
+        setTasks(tasks.filter(task => task.id !== taskId));
     }
 
     function handleDone(taskId: number) {
         setTasks(tasks.map(task => {
-            if (task.id == taskId) {
+            if (task.id === taskId) {
                 task.isDone = !task.isDone;
             }
             return task;
