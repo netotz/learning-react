@@ -20,13 +20,23 @@ export default function TasksList({ tasks, setTasks }: Props) {
             return task;
         }));
     }
+    
+    function handleEdit(taskId: number, newText: string) {
+        setTasks(tasks.map(task => {
+            if (task.id === taskId) {
+                task.text = newText;
+            }
+            return task;
+        }));
+    }
 
     return (
         <div className="tasks-list">
             {Array.from(tasks.values(), task =>
                 <TaskNote task={task}
                     handleDelete={handleDelete}
-                    handleDone={handleDone} />
+                    handleDone={handleDone}
+                    handleEdit={handleEdit} />
             )}
         </div>
     );
