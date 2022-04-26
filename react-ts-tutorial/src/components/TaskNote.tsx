@@ -47,8 +47,15 @@ export default function TaskNote({ task, handleDelete, handleDone, handleEdit }:
             )}
 
             <div>
-                <span className="icon"
-                    onClick={() => isEdit ? saveEdit() : setIsEdit(true)}>
+                <span className={task.isDone ? "icon icon-disabled" : "icon"}
+                    onClick={() => {
+                        if (isEdit) {
+                            saveEdit();
+                        }
+                        else if (!task.isDone) {
+                            setIsEdit(true);
+                        }
+                    }}>
                     <AiFillEdit />
                 </span>
                 <span className="icon"
