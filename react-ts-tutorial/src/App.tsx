@@ -4,7 +4,7 @@ import InputField from "./components/InputField";
 import TasksList from "./components/TasksList";
 import { Task } from "./models/Task";
 
-function App() {
+export default function App() {
   const [taskText, setTaskText] = useState("");
   const [tasks, setTasks] = useState<Task[]>([]);
 
@@ -36,5 +36,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

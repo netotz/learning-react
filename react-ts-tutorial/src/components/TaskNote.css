@@ -3,8 +3,16 @@
     border-radius: 5px;
     padding: 20px;
     margin-top: 15px;
-    background-color: yellow;
     transition: 0.1s;
+}
+
+.task-active {
+    background-color: yellow;
+}
+
+.task-done {
+    background-color: orange;
+    opacity: 0.7;
 }
 
 .task-note-text {

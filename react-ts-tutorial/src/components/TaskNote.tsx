@@ -25,7 +25,7 @@ export default function TaskNote({ task, handleDelete, handleDone, handleEdit }:
     }
 
     return (
-        <form className='task-note'
+        <form className={task.isDone ? "task-note task-done" : "task-note task-active"}
             onSubmit={e => {
                 e.preventDefault();
                 saveEdit();
