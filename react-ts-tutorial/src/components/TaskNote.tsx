@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Task } from '../models/Task';
 import { AiFillEdit, AiFillDelete, AiOutlineCheck } from "react-icons/ai"
 import "./TaskNote.css"
@@ -14,16 +14,26 @@ export default function TaskNote({ task, handleDelete, handleDone, handleEdit }:
     const [isEdit, setIsEdit] = useState(false);
     const [editText, setEditText] = useState(task.text);
 
+    const inputRef = useRef<HTMLInputElement>(null);
+    useEffect(() => {
+      inputRef.current?.focus();
+    }, [isEdit]);
+    
+    function saveEdit() {
+        handleEdit(task.id, editText);
+        setIsEdit(false);
+    }
+
     return (
         <form className='task-note'
             onSubmit={e => {
                 e.preventDefault();
-                handleEdit(task.id, editText);
-                setIsEdit(false);
+                saveEdit();
             }}>
 
             {isEdit ? (
                 <input className='task-note-text'
+                    ref={inputRef}
                     value={editText}
                     onChange={e => setEditText(e.target.value)}/>
             ) : (
@@ -35,13 +45,23 @@ export default function TaskNote({ task, handleDelete, handleDone, handleEdit }:
             )}
 
             <div>
-                <span className="icon" onClick={() => setIsEdit(true)}>
+                <span className="icon" onClick={() => {
+                    if (isEdit) {
+                        saveEdit();
+                    } else {
+                        setIsEdit(true);
+                    }
+                }}>
                     <AiFillEdit />
                 </span>
                 <span className="icon" onClick={() => handleDelete(task.id)}>
                     <AiFillDelete />
                 </span>
-                <span className="icon" onClick={() => handleDone(task.id)}>
+                <span className={isEdit ? "icon icon-disabled" : "icon"}
+                    onClick={() => {
+                        if (!isEdit)
+                            handleDone(task.id)
+                    }}>
                     <AiOutlineCheck />
                 </span>
             </div>
