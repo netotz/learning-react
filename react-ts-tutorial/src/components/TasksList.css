@@ -4,6 +4,7 @@
     flex-direction: column;
     width: 47.5%;
     padding: 15px;
+    transition: 0.1s;
 }
 
 @media (max-width: 1100px) {

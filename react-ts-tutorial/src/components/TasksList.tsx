@@ -18,7 +18,8 @@ export default function TasksList({ tasks, setTasks }: Props) {
                 task.isDone = !task.isDone;
             }
             return task;
-        }));
+        }).sort((t1, t2) =>
+            Number(t1.isDone) - Number(t2.isDone)));
     }
     
     function handleEdit(taskId: number, newText: string) {
