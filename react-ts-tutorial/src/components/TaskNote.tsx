@@ -53,7 +53,7 @@ export default function TaskNote({ task, handleDelete, handleDone, handleEdit }:
                 </span>
                 <span className="icon"
                     onClick={() => {
-                        if (window.confirm("Are you sure you want to delete this note?")) {
+                        if (task.isDone || window.confirm("Are you sure you want to delete this note?")) {
                             handleDelete(task.id);
                         }
                     }}>
