@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import InputField from "./components/InputField";
 import TasksList from "./components/TasksList";
-import { Task } from "./models/Task";
+import { sortTasks, Task } from "./models/Task";
 
 export default function App() {
   const [taskText, setTaskText] = useState("");
@@ -14,11 +14,12 @@ export default function App() {
     if (taskText === "")
       return;
 
-    setTasks([...tasks, {
+    setTasks(sortTasks([...tasks, {
       id: Date.now(),
       text: taskText,
       isDone: false,
-    }]);
+      lastModified: new Date()
+    }]));
     setTaskText("");
   }
 

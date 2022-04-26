@@ -17,7 +17,9 @@ export default function TaskNote({ task, handleDelete, handleDone, handleEdit }:
     const inputRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
       inputRef.current?.focus();
+      setEditText(task.text);
     }, [isEdit]);
+    
     
     function saveEdit() {
         handleEdit(task.id, editText);

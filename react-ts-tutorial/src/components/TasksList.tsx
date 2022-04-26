@@ -1,5 +1,5 @@
 import React from "react";
-import { Task } from "../models/Task";
+import { sortTasks, Task } from "../models/Task";
 import TaskNote from "./TaskNote";
 
 interface Props {
@@ -13,22 +13,23 @@ export default function TasksList({ tasks, setTasks }: Props) {
     }
 
     function handleDone(taskId: number) {
-        setTasks(tasks.map(task => {
+        setTasks(sortTasks(tasks.map(task => {
             if (task.id === taskId) {
                 task.isDone = !task.isDone;
+                task.lastModified = new Date();
             }
             return task;
-        }).sort((t1, t2) =>
-            Number(t1.isDone) - Number(t2.isDone)));
+        })));
     }
     
     function handleEdit(taskId: number, newText: string) {
-        setTasks(tasks.map(task => {
+        setTasks(sortTasks(tasks.map(task => {
             if (task.id === taskId) {
                 task.text = newText;
+                task.lastModified = new Date();
             }
             return task;
-        }));
+        })));
     }
 
     return (
