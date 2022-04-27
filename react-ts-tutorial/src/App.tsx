@@ -5,35 +5,28 @@ import TasksList from "./components/TasksList";
 import { sortTasks, Task } from "./models/Task";
 
 export default function App() {
-  const [taskText, setTaskText] = useState("");
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  function handleSubmit(event: React.FormEvent) {
-    event.preventDefault();
-
-    if (taskText === "")
+  function handleSubmit(newText: string) {
+    if (newText === "")
       return;
 
     setTasks([...tasks, {
       id: Date.now(),
-      text: taskText,
+      text: newText,
       isDone: false,
       lastModified: new Date()
     }]);
-    setTaskText("");
   }
 
   return (
     <div className="App">
       <span className="heading">Taskify</span>
 
-      <InputField
-        taskText={taskText}
-        setTaskText={setTaskText}
-        handleSubmit={handleSubmit}
-      />
+      <InputField handleSubmit={handleSubmit} />
 
-      <TasksList tasks={sortTasks(tasks)} setTasks={setTasks} />
+      <TasksList tasks={sortTasks(tasks)}
+        setTasks={setTasks} />
     </div>
   );
 }
