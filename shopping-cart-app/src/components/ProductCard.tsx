@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import { Product } from '../models/Product';
+import Product from '../models/Product';
 import { Card, CardInfo } from './ProductCard.styles';
 
 interface Props {
