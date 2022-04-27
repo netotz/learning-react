@@ -14,12 +14,12 @@ export default function App() {
     if (taskText === "")
       return;
 
-    setTasks(sortTasks([...tasks, {
+    setTasks([...tasks, {
       id: Date.now(),
       text: taskText,
       isDone: false,
       lastModified: new Date()
-    }]));
+    }]);
     setTaskText("");
   }
 
@@ -33,7 +33,7 @@ export default function App() {
         handleSubmit={handleSubmit}
       />
 
-      <TasksList tasks={tasks} setTasks={setTasks} />
+      <TasksList tasks={sortTasks(tasks)} setTasks={setTasks} />
     </div>
   );
 }
