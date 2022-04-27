@@ -1,5 +1,6 @@
 import Button from '@mui/material/Button';
 import { Product } from '../models/Product';
+import { Card, CardInfo } from './ProductCard.styles';
 
 interface Props {
     product: Product;
@@ -8,14 +9,14 @@ interface Props {
 
 export default function ProductCard({ product, handleAddToCart }: Props) {
     return (
-        <div>
+        <Card>
             <img src={product.image} alt={product.title}></img>
-            <div>
+            <CardInfo>
                 <h3>{product.title}</h3>
                 <p>{product.description}</p>
                 <h3>${product.price}</h3>
-            </div>
+            </CardInfo>
             <Button onClick={() => handleAddToCart(product)}>Add to cart</Button>
-        </div>
+        </Card>
     )
 }
