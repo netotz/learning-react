@@ -3,6 +3,7 @@ import { Badge, Drawer, Grid, LinearProgress } from '@mui/material';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { MainDiv, StyledIconButton } from './App.styles';
+import CartMenu from './components/CartMenu';
 import ProductCard from './components/ProductCard';
 import CartProduct, { countTotalProducts } from './models/CartProduct';
 import Product from './models/Product';
@@ -15,7 +16,7 @@ enum FakeStoreApi {
   Products = "https://fakestoreapi.com/products",
 }
 
-function App() {
+export default function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartProducts, setCartProducts] = useState<CartProduct[]>([])
   
@@ -33,14 +34,37 @@ function App() {
     return <div>Something went wrong</div>
   }
 
-  function handleAddToCart(product: Product) {
+  function handleAddToCart(newProduct: Product) {
+    setCartProducts(products => {
+      // if product is already in cart
+      if (cartProducts.find(p => p.id === newProduct.id)) {
+        return products.map(p => {
+          if (p.id === newProduct.id) {
+            // increment amount
+            p.amount++;
+          }
+          return p;
+        });
+      }
+
+      // if it's first time of this product in cart
+      return [...products, {
+        ...newProduct,
+        amount: 1
+      }];
+    });
+  }
+  
+  function handleRemoveFromCart(productId: number) {
 
   }
 
   return (
     <MainDiv>
       <Drawer anchor='right' open={isCartOpen} onClose={() => setIsCartOpen(false)}>
-        Cart
+        <CartMenu cartProducts={cartProducts}
+          handleAddToCart={handleAddToCart}
+          handleRemoveFromCart={handleRemoveFromCart}></CartMenu>
       </Drawer>
 
       <StyledIconButton onClick={() => setIsCartOpen(true)}>
@@ -60,5 +84,3 @@ function App() {
     </MainDiv>
   );
 }
-
-export default App;
