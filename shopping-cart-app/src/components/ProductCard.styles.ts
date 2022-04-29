@@ -14,9 +14,10 @@ export const Card = styled.div`
     }
 
     img {
-        max-height: 250px;
-        object-fit: cover;
+        max-height: 225px;
+        object-fit: contain;
         border-radius: 20px 20px 0 0;
+        margin: 20px 20px 20px 20px;
     }
 `;
 

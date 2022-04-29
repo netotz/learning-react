@@ -12,7 +12,7 @@ export const Item = styled.div`
     }
 
     img {
-        max-width: 125px;
+        max-width: 80px;
         object-fit: contain;
         margin-left: 20px;
     }
