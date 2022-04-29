@@ -55,8 +55,21 @@ export default function App() {
     });
   }
   
-  function handleRemoveFromCart(productId: number) {
+  function handleRemoveFromCart(idToRemove: number) {
+    setCartProducts(products =>
+      products.filter(p => {
+        if (p.id === idToRemove) {
+          if (p.amount <= 1) {
+            // filter out product whose amount would be 0
+            return false;
+          }
 
+          p.amount--;
+        }
+
+        return true;
+      })
+    );
   }
 
   return (
