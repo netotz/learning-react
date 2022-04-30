@@ -1,4 +1,4 @@
-import CartProduct from "../models/CartProduct"
+import CartProduct, { calculateTotalPrice } from "../models/CartProduct"
 import { CartMenuStyled } from "./CartMenu.styles";
 import CartMenuItem from "./CartMenuItem";
 
@@ -20,6 +20,7 @@ export default function CartMenu({ cartProducts, handleAddToCart, handleRemoveFr
                     handleRemoveFromCart={handleRemoveFromCart}
                     ></CartMenuItem>
             ))}
+            <h2>Total: ${calculateTotalPrice(cartProducts).toFixed(2)}</h2>
         </CartMenuStyled>
     );
 }
