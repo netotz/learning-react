@@ -41,7 +41,7 @@ export default function App() {
         return products.map(p => {
           if (p.id === newProduct.id) {
             // increment amount
-            p.amount++;
+            p.quantity++;
           }
           return p;
         });
@@ -50,7 +50,7 @@ export default function App() {
       // if it's first time of this product in cart
       return [...products, {
         ...newProduct,
-        amount: 1
+        quantity: 1
       }];
     });
   }
@@ -59,12 +59,12 @@ export default function App() {
     setCartProducts(products =>
       products.filter(p => {
         if (p.id === idToRemove) {
-          if (p.amount <= 1) {
+          if (p.quantity <= 1) {
             // filter out product whose amount would be 0
             return false;
           }
 
-          p.amount--;
+          p.quantity--;
         }
 
         return true;

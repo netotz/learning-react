@@ -15,13 +15,13 @@ export default function CartMenuItem({ product, handleAddToCart, handleRemoveFro
                 <h3>{product.title}</h3>
                 <Info>
                     <p>Price: ${product.price}</p>
-                    <p>Total: ${(product.amount * product.price).toFixed(2)}</p>
+                    <p>Total: ${(product.quantity * product.price).toFixed(2)}</p>
                 </Info>
                 <Info>
                     <Button size="small" disableElevation
                         variant="contained"
                         onClick={() => handleRemoveFromCart(product.id)}>-</Button>
-                    <p>{product.amount}</p>
+                    <p>{product.quantity}</p>
                     <Button size="small" disableElevation
                         variant="contained"
                         onClick={() => handleAddToCart(product)}>+</Button>
