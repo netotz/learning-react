@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import { MainDiv, StyledIconButton } from './App.styles';
 import CartMenu from './components/CartMenu';
 import ProductCard from './components/ProductCard';
+import SearchBar from './components/SearchBar';
 import CartProduct, { countTotalProducts } from './models/CartProduct';
 import Product from './models/Product';
 
@@ -28,12 +29,13 @@ function loadCartProducts() {
 export default function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartProducts, setCartProducts] = useState(loadCartProducts());
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const jsonProducts = JSON.stringify(cartProducts);
     localStorage.setItem(StorageKeys.CartProducts, jsonProducts);
   }, [cartProducts]);
-  
+
   const { data, isLoading, error } = useQuery<Product[]>(
     Queries.Products,
     async () => await (await fetch(FakeStoreApi.Products)).json()
@@ -66,7 +68,7 @@ export default function App() {
       }];
     });
   }
-  
+
   function handleRemoveFromCart(idToRemove: number) {
     setCartProducts(products =>
       products.filter(p => {
@@ -86,6 +88,8 @@ export default function App() {
 
   return (
     <MainDiv>
+      <SearchBar term={searchTerm} setTerm={setSearchTerm}></SearchBar>
+
       <Drawer anchor='right' open={isCartOpen} onClose={() => setIsCartOpen(false)}>
         <CartMenu cartProducts={cartProducts}
           handleAddToCart={handleAddToCart}
@@ -94,17 +98,22 @@ export default function App() {
 
       <StyledIconButton onClick={() => setIsCartOpen(true)}>
         <Badge badgeContent={countTotalProducts(cartProducts)} color="info">
-          <AddShoppingCart/>
+          <AddShoppingCart />
         </Badge>
       </StyledIconButton>
-      
+
       <Grid container spacing={3}>
-        {data?.map(product => (
-          <Grid item key={product.id} xs={12} sm={4}>
-            <ProductCard product={product}
-              handleAddToCart={handleAddToCart}/>
-          </Grid>
-        ))}
+        {
+          data?.filter(product =>
+            product.title.toLowerCase().includes(searchTerm)
+            || product.description.toLowerCase().includes(searchTerm))
+            .map(product => (
+              <Grid item key={product.id} xs={12} sm={4}>
+                <ProductCard product={product}
+                  handleAddToCart={handleAddToCart} />
+              </Grid>
+            ))
+        }
       </Grid>
     </MainDiv>
   );
