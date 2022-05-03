@@ -82,7 +82,7 @@ export default function App() {
 
       <StyledIconButton onClick={() => setIsCartOpen(true)}>
         <Badge badgeContent={countTotalProducts(cartProducts)} color="info">
-          <AddShoppingCart></AddShoppingCart>
+          <AddShoppingCart/>
         </Badge>
       </StyledIconButton>
       
@@ -90,7 +90,7 @@ export default function App() {
         {data?.map(product => (
           <Grid item key={product.id} xs={12} sm={4}>
             <ProductCard product={product}
-              handleAddToCart={handleAddToCart}></ProductCard>
+              handleAddToCart={handleAddToCart}/>
           </Grid>
         ))}
       </Grid>
