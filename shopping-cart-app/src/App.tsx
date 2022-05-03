@@ -1,6 +1,6 @@
 import { AddShoppingCart } from '@mui/icons-material';
 import { Badge, Drawer, Grid, LinearProgress } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { MainDiv, StyledIconButton } from './App.styles';
 import CartMenu from './components/CartMenu';
@@ -16,16 +16,28 @@ enum FakeStoreApi {
   Products = "https://fakestoreapi.com/products",
 }
 
+enum StorageKeys {
+  CartProducts = 'CartProducts'
+}
+
+function loadCartProducts() {
+  const jsonProducts = localStorage.getItem(StorageKeys.CartProducts) || "";
+  return JSON.parse(jsonProducts) as CartProduct[];
+}
+
 export default function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartProducts, setCartProducts] = useState<CartProduct[]>([])
+  const [cartProducts, setCartProducts] = useState(loadCartProducts());
+
+  useEffect(() => {
+    const jsonProducts = JSON.stringify(cartProducts);
+    localStorage.setItem(StorageKeys.CartProducts, jsonProducts);
+  }, [cartProducts]);
   
   const { data, isLoading, error } = useQuery<Product[]>(
     Queries.Products,
     async () => await (await fetch(FakeStoreApi.Products)).json()
   );
-
-  console.log(data);
 
   if (isLoading) {
     return <LinearProgress></LinearProgress>
@@ -77,7 +89,7 @@ export default function App() {
       <Drawer anchor='right' open={isCartOpen} onClose={() => setIsCartOpen(false)}>
         <CartMenu cartProducts={cartProducts}
           handleAddToCart={handleAddToCart}
-          handleRemoveFromCart={handleRemoveFromCart}></CartMenu>
+          handleRemoveFromCart={handleRemoveFromCart} />
       </Drawer>
 
       <StyledIconButton onClick={() => setIsCartOpen(true)}>
