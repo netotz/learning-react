@@ -1,4 +1,4 @@
-import { Box, Button, Flex, FormControl, FormErrorMessage, FormLabel, Heading, Input } from "@chakra-ui/react";
+import { Box, Button, Flex, FormControl, FormErrorMessage, FormLabel, Heading, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 
 interface Props {
@@ -36,6 +36,12 @@ export default function SignUp({ }: Props) {
 
     const [errorMessage, setErrorMessage] = useState("");
     const [isSuccess, setIsSuccess] = useState(false);
+
+    const [isPasswordShown, setIsPasswordShown] = useState(false);
+
+    function togglePasswordShown() {
+        setIsPasswordShown(!isPasswordShown);
+    }
 
     // focus on user input when component initializes
     useEffect(() => {
@@ -75,14 +81,34 @@ export default function SignUp({ }: Props) {
                 <Box my={2} textAlign="left">
                     <form>
                         <FormControl isRequired isInvalid={!userInput.isValid}>
-                            <FormLabel htmlFor="userName">User name</FormLabel>
+                            <FormLabel htmlFor="userName">Username</FormLabel>
                             <Input id="userName"
                                 value={userInput.text}
                                 onChange={e => setUserInput({ ...userInput, text: e.target.value })}
                                 onFocus={() => setUserInput({ ...userInput, isFocused: true })}
                                 onBlur={() => setUserInput({ ...userInput, isFocused: false })} />
                             {userInput.isValid ? null : (
-                                <FormErrorMessage>User name is invalid</FormErrorMessage>
+                                <FormErrorMessage>Username is invalid</FormErrorMessage>
+                            )}
+                        </FormControl>
+
+                        <FormControl isRequired isInvalid={!passwordInput.isValid}>
+                            <FormLabel htmlFor="password">Password</FormLabel>
+                            <InputGroup>
+                                <Input id="password"
+                                    type={isPasswordShown ? "text" : "password"}
+                                    value={passwordInput.text}
+                                    onChange={e => setPasswordInput({ ...passwordInput, text: e.target.value })}
+                                    onFocus={() => setPasswordInput({ ...passwordInput, isFocused: true })}
+                                    onBlur={() => setPasswordInput({ ...passwordInput, isFocused: false })} />
+                                <InputRightElement w={10}>
+                                    <Button size="sm" onClick={togglePasswordShown}>
+                                        {isPasswordShown ? '👀' : '🙈'}
+                                    </Button>
+                                </InputRightElement>
+                            </InputGroup>
+                            {passwordInput.isValid ? null : (
+                                <FormErrorMessage>Password doesn't meet requirements.</FormErrorMessage>
                             )}
                         </FormControl>
 
